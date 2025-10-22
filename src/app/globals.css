@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+.char {
+  display: inline-block;
+  position: relative;
+}
+
+.high-line-reveal {
+  transition: transform 0.3s ease;
+  transform: scaleX(0);
+}
+
+.text-clip-w {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.btn-text.is-footer {
+  position: relative;
+  overflow: hidden;
+}
