@@ -277,19 +277,19 @@ export default function Navigation() {
           <div className="flex-3 flex relative">
             {/* Main Content */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 lg:w-3/4 p-8 flex flex-col lg:flex-row items-start lg:items-end gap-8 lg:gap-8">
-              <div className="flex flex-col gap-2 flex-3" ref={menuCol1}>
+              <div className="flex flex-col gap-2 flex-3 " ref={menuCol1}>
                 <div className="menu-link overflow-hidden">
                   <Link
                     href="/"
-                    className="text-4xl lg:text-5xl font-medium leading-tight text-white block transform translate-y-[-110%] will-change-transform "
+                    className="text-4xl lg:text-5xl font-medium leading-tight text-white block transform translate-y-[-110%] will-change-transform  hover:bg-linear-to-r from-[#0AE448] to-[#ABFF84] hover:text-transparent hover:bg-clip-text "
                   >
                     Home
                   </Link>
                 </div>
-                <div className="menu-link overflow-hidden">
+                <div className="menu-link overflow-hidden ">
                   <Link
                     href="/about"
-                    className="text-4xl lg:text-5xl font-medium leading-tight text-white block transform translate-y-[-110%] will-change-transform"
+                    className="text-4xl lg:text-5xl font-medium leading-tight text-white block transform translate-y-[-110%] will-change-transform  hover:bg-linear-to-r from-[#0AE448] to-[#ABFF84] hover:text-transparent hover:bg-clip-text "
                   >
                     About Me
                   </Link>
@@ -297,7 +297,7 @@ export default function Navigation() {
                 <div className="menu-link overflow-hidden">
                   <Link
                     href="/projects"
-                    className="text-4xl lg:text-5xl font-medium leading-tight text-white block transform translate-y-[-110%] will-change-transform"
+                    className="text-4xl lg:text-5xl font-medium leading-tight text-white block transform translate-y-[-110%] will-change-transform  hover:bg-linear-to-r from-[#0AE448] to-[#ABFF84] hover:text-transparent hover:bg-clip-text"
                   >
                     Projects
                   </Link>
@@ -305,7 +305,7 @@ export default function Navigation() {
                 <div className="menu-link overflow-hidden">
                   <Link
                     href="/contact"
-                    className="text-4xl lg:text-5xl font-medium leading-tight text-white block transform translate-y-[-110%] will-change-transform"
+                    className="text-4xl lg:text-5xl font-medium leading-tight text-white block transform translate-y-[-110%] will-change-transform  hover:bg-linear-to-r from-[#0AE448] to-[#ABFF84] hover:text-transparent hover:bg-clip-text"
                   >
                     Contact
                   </Link>
@@ -318,7 +318,7 @@ export default function Navigation() {
                     href="https://github.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xl lg:text-2xl font-medium text-gray-400 block transform translate-y-[-110%] will-change-transform"
+                    className="text-xl lg:text-2xl font-medium text-gray-400 block transform translate-y-[-110%] will-change-transform  hover:bg-linear-to-r from-[#0AE448] to-[#ABFF84] hover:text-transparent hover:bg-clip-text"
                   >
                     Github
                   </a>
@@ -328,7 +328,7 @@ export default function Navigation() {
                     href="https://linkedin.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xl lg:text-2xl font-medium text-gray-400 block transform translate-y-[-110%] will-change-transform"
+                    className="text-xl lg:text-2xl font-medium text-gray-400 block transform translate-y-[-110%] will-change-transform  hover:bg-linear-to-r from-[#0AE448] to-[#ABFF84] hover:text-transparent hover:bg-clip-text"
                   >
                     Linkedin
                   </a>
@@ -336,7 +336,7 @@ export default function Navigation() {
                 <div className="menu-tag overflow-hidden">
                   <a
                     href="mailto:example@mail.com"
-                    className="text-xl lg:text-2xl font-medium text-gray-400 block transform translate-y-[-110%] will-change-transform"
+                    className="text-xl lg:text-2xl font-medium text-gray-400 block transform translate-y-[-110%] will-change-transform  hover:bg-linear-to-r from-[#0AE448] to-[#ABFF84] hover:text-transparent hover:bg-clip-text "
                   >
                     Mail
                   </a>
