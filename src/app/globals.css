@@ -1,21 +1,22 @@
 @import "tailwindcss";
+@tailwind utilities;
 
-.char {
-  display: inline-block;
-  position: relative;
+@theme {
+  --color-primary: #0039cf;
 }
 
-.high-line-reveal {
-  transition: transform 0.3s ease;
-  transform: scaleX(0);
-}
+@layer utilities {
+  .mouse::before {
+    content: "";
+    @apply absolute w-[12px] h-[12px] left-1/2 top-[10px] bg-white rounded-full opacity-100;
+    transform: translateX(-50%);
+    animation: wheel 2s infinite;
+  }
 
-.text-clip-w {
-  display: inline-block;
-  overflow: hidden;
-}
-
-.btn-text.is-footer {
-  position: relative;
-  overflow: hidden;
+  @keyframes wheel {
+    to {
+      opacity: 0;
+      top: 60px;
+    }
+  }
 }

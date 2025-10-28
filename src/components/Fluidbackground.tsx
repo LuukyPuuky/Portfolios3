@@ -2,6 +2,7 @@
 
 import { JSX, useEffect, useRef } from "react";
 import * as THREE from "three";
+import ProfileSection from "./HeroSection";
 
 const vertexShader = `
 varying vec2 vUv;
@@ -188,7 +189,7 @@ export default function FluidBackground(): JSX.Element {
       fluidDecay: 0.98,
       trailLength: 0.8,
       stopDecay: 0.85,
-      color1: "#00FFFF	",
+      color1: "#0039cf",
       color2: "#000000",
       colorIntensity: 1.0,
       softness: 0.5,
@@ -399,9 +400,12 @@ export default function FluidBackground(): JSX.Element {
     <>
       <div
         ref={containerRef}
-        className="fixed inset-0 w-full h-full -z-10"
+        className="fixed inset-0 w-full h-full -z-10 "
         style={{ touchAction: "none" }}
       />
+      <div className="flex items-center justify-center w-full h-full p-8 md:p-16">
+        <ProfileSection />
+      </div>
     </>
   );
 }
