@@ -188,8 +188,8 @@ export default function FluidBackground(): JSX.Element {
       fluidDecay: 0.98,
       trailLength: 0.8,
       stopDecay: 0.85,
-      color1: "#0ae448",
-      color2: "#ABFF84",
+      color1: "#00FFFF	",
+      color2: "#000000",
       colorIntensity: 1.0,
       softness: 0.5,
     };
@@ -294,8 +294,35 @@ export default function FluidBackground(): JSX.Element {
       fluidMaterial.uniforms.iMouse.value.set(0, 0, 0, 0);
     };
 
+    const handleTouchMove = (event: TouchEvent): void => {
+      if (!containerRef.current || event.touches.length === 0) return;
+      event.preventDefault();
+      const touch = event.touches[0];
+      const rect = containerRef.current.getBoundingClientRect();
+      PrevMouseX = MouseX;
+      PrevMouseY = MouseY;
+      MouseX = touch.clientX - rect.left;
+      MouseY = rect.height - (touch.clientY - rect.top);
+      lastMoveTime = performance.now();
+      fluidMaterial.uniforms.iMouse.value.set(
+        MouseX,
+        MouseY,
+        PrevMouseX,
+        PrevMouseY
+      );
+    };
+
+    const handleTouchEnd = (): void => {
+      fluidMaterial.uniforms.iMouse.value.set(0, 0, 0, 0);
+    };
+
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseleave", handleMouseLeave);
+    containerRef.current.addEventListener("touchmove", handleTouchMove, {
+      passive: false,
+    });
+    containerRef.current.addEventListener("touchend", handleTouchEnd);
+    containerRef.current.addEventListener("touchcancel", handleTouchEnd);
 
     let animationId: number;
     function animate(): void {
@@ -348,8 +375,15 @@ export default function FluidBackground(): JSX.Element {
       document.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("resize", handleResize);
 
-      if (containerRef.current && renderer.domElement) {
-        containerRef.current.removeChild(renderer.domElement);
+      if (containerRef.current) {
+        containerRef.current.removeEventListener("touchmove", handleTouchMove);
+        containerRef.current.removeEventListener("touchend", handleTouchEnd);
+        containerRef.current.removeEventListener("touchcancel", handleTouchEnd);
+
+        if (renderer.domElement) {
+          // eslint-disable-next-line react-hooks/exhaustive-deps
+          containerRef.current.removeChild(renderer.domElement);
+        }
       }
 
       renderer.dispose();
@@ -362,10 +396,12 @@ export default function FluidBackground(): JSX.Element {
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="fixed inset-0 w-full h-full -z-10"
-      style={{ touchAction: "none" }}
-    />
+    <>
+      <div
+        ref={containerRef}
+        className="fixed inset-0 w-full h-full -z-10"
+        style={{ touchAction: "none" }}
+      />
+    </>
   );
 }

@@ -213,17 +213,7 @@ export default function Navigation() {
       {/* Menu Bar */}
       <div className="fixed top-0 left-0 w-full p-8 flex justify-between items-center pointer-events-auto text-gray-400 z-50">
         {/* Logo */}
-        <div className="w-8 h-8">
-          {/* <Link href="/">
-            <Image
-              src="/Luukspfp.jpg"
-              alt="Logo"
-              width={32}
-              height={32}
-              className="w-full h-full object-cover"
-            />
-          </Link> */}
-        </div>
+        <div className="w-8 h-8"></div>
 
         {/* Menu Toggle Button */}
         <div
@@ -248,9 +238,9 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* Menu Overlay */}
+      {/* Menu Overlay  background*/}
       <div
-        className="fixed top-0 left-0 w-full h-screen bg-black overflow-hidden z-40 will-change-transform"
+        className="fixed top-0 left-0 w-full h-screen bg-[#0E100F] overflow-hidden z-40 will-change-transform"
         ref={menuOverlay}
         style={{ clipPath: "polygon(0 0, 100% 0, 100% 0%, 0% 0%)" }}
       >
@@ -336,7 +326,7 @@ export default function Navigation() {
                 <div className="menu-tag overflow-hidden">
                   <a
                     href="mailto:example@mail.com"
-                    className="text-xl lg:text-2xl font-medium text-gray-400 block transform translate-y-[-110%] will-change-transform  hover:bg-linear-to-r from-[#0AE448] to-[#ABFF84] hover:text-transparent hover:bg-clip-text "
+                    className="text-xl lg:text-2xl font-medium text-gray-400 block transform translate-y-[-110%] will-change-transform  hover:bg-linear-to-r from-[#0AE448] to-[#ABFF84] hover:text-transparent hover:bg-clip-text hover:"
                   >
                     Mail
                   </a>

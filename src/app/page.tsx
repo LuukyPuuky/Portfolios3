@@ -9,6 +9,7 @@ export default function Home() {
         <Navigation />
         <FluidBackground />
       </div>
+      <div className="h-screen bg-black"></div>
       <div className="h-screen bg-linear-to-br from-[#0ae448] to-[#0085d0]  w-full  flex items-center justify-center "></div>
     </>
   );
