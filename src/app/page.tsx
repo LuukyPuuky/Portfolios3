@@ -1,6 +1,7 @@
 import Navigation from "@/components/navBar";
 
 import FluidBackground from "@/components/Fluidbackground";
+import AboutmeSection from "@/components/AboutmeSection";
 import localFont from "next/font/local";
 
 const avantt = localFont({
@@ -10,14 +11,13 @@ const avantt = localFont({
 export default function Home() {
   return (
     <>
-      <div
-        className={`h-screen flex items-center justify-center p-6 ${avantt.className}`}
+      <section
+        className={`h-screen flex items-center justify-center p-6 bg-transparent ${avantt.className}`}
       >
         <Navigation />
         <FluidBackground />
-      </div>
-      <div className="h-screen bg-black"></div>
-      <div className="h-screen bg-linear-to-br from-[#0ae448] to-[#0085d0]  w-full  flex items-center justify-center "></div>
+      </section>
+      <AboutmeSection />
     </>
   );
 }

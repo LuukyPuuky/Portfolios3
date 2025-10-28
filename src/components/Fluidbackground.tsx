@@ -400,7 +400,7 @@ export default function FluidBackground(): JSX.Element {
     <>
       <div
         ref={containerRef}
-        className="fixed inset-0 w-full h-full -z-10 "
+        className="fixed inset-0 w-full h-screen -z-10 "
         style={{ touchAction: "none" }}
       />
       <div className="flex items-center justify-center w-full h-full p-8 md:p-16">
