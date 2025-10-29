@@ -19,6 +19,20 @@
       top: 60px;
     }
   }
+
+  @media (max-width: 768px) {
+    .mouse::before {
+      top: 60px;
+      animation: wheel-mobile 2s infinite;
+    }
+
+    @keyframes wheel-mobile {
+      to {
+        opacity: 0;
+        top: 10px;
+      }
+    }
+  }
 }
 ::-webkit-scrollbar {
   display: none;

@@ -2,7 +2,7 @@
 
 import { JSX, useEffect, useRef } from "react";
 import * as THREE from "three";
-import ProfileSection from "./HeroSection";
+import HeroSection from "./HeroSection";
 
 const vertexShader = `
 varying vec2 vUv;
@@ -295,22 +295,40 @@ export default function FluidBackground(): JSX.Element {
       fluidMaterial.uniforms.iMouse.value.set(0, 0, 0, 0);
     };
 
-    const handleTouchMove = (event: TouchEvent): void => {
+    let isDragging = false;
+    let dragStartY = 0;
+    const dragThreshold = 10;
+
+    const handleTouchStart = (event: TouchEvent): void => {
       if (!containerRef.current || event.touches.length === 0) return;
-      event.preventDefault();
+      const touch = event.touches[0];
+      dragStartY = touch.clientY;
+      isDragging = false;
+    };
+
+    const handleTouchDrag = (event: TouchEvent): void => {
+      if (!containerRef.current || event.touches.length === 0) return;
       const touch = event.touches[0];
       const rect = containerRef.current.getBoundingClientRect();
-      PrevMouseX = MouseX;
-      PrevMouseY = MouseY;
-      MouseX = touch.clientX - rect.left;
-      MouseY = rect.height - (touch.clientY - rect.top);
-      lastMoveTime = performance.now();
-      fluidMaterial.uniforms.iMouse.value.set(
-        MouseX,
-        MouseY,
-        PrevMouseX,
-        PrevMouseY
-      );
+
+      const moveY = Math.abs(touch.clientY - dragStartY);
+
+      if (moveY < dragThreshold || isDragging) {
+        isDragging = true;
+        event.preventDefault();
+
+        PrevMouseX = MouseX;
+        PrevMouseY = MouseY;
+        MouseX = touch.clientX - rect.left;
+        MouseY = rect.height - (touch.clientY - rect.top);
+        lastMoveTime = performance.now();
+        fluidMaterial.uniforms.iMouse.value.set(
+          MouseX,
+          MouseY,
+          PrevMouseX,
+          PrevMouseY
+        );
+      }
     };
 
     const handleTouchEnd = (): void => {
@@ -319,7 +337,10 @@ export default function FluidBackground(): JSX.Element {
 
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseleave", handleMouseLeave);
-    containerRef.current.addEventListener("touchmove", handleTouchMove, {
+    containerRef.current.addEventListener("touchstart", handleTouchStart, {
+      passive: true,
+    });
+    containerRef.current.addEventListener("touchmove", handleTouchDrag, {
       passive: false,
     });
     containerRef.current.addEventListener("touchend", handleTouchEnd);
@@ -377,7 +398,11 @@ export default function FluidBackground(): JSX.Element {
       window.removeEventListener("resize", handleResize);
 
       if (containerRef.current) {
-        containerRef.current.removeEventListener("touchmove", handleTouchMove);
+        containerRef.current.removeEventListener(
+          "touchstart",
+          handleTouchStart
+        );
+        containerRef.current.removeEventListener("touchmove", handleTouchDrag);
         containerRef.current.removeEventListener("touchend", handleTouchEnd);
         containerRef.current.removeEventListener("touchcancel", handleTouchEnd);
 
@@ -404,7 +429,7 @@ export default function FluidBackground(): JSX.Element {
         style={{ touchAction: "none" }}
       />
       <div className="flex items-center justify-center w-full h-full p-8 md:p-16">
-        <ProfileSection />
+        <HeroSection />
       </div>
     </>
   );
