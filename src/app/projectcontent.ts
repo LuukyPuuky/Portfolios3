@@ -15,10 +15,10 @@ interface Project {
 export const PROJECTS: Project[] = [
   {
     id: "Branding",
-    title: "Branding Project",
+    title: "Branding",
     links: [
       { label: "GitHub", url: "https://github.com/branding-project" },
-      { label: "Live Demo", url: "https://branding-project.com" },
+      { label: "View Project", url: "https://branding-project.com" },
     ],
     imageUrl: "/projects/branding.png",
     category: "Design",
@@ -29,7 +29,7 @@ export const PROJECTS: Project[] = [
     title: "Project OWOW",
     links: [
       { label: "GitHub", url: "https://github.com/project-owow" },
-      { label: "Live Demo", url: "https://project-owow.com" },
+      { label: "View Project", url: "" },
     ],
     imageUrl: "/projects/project-owow.png",
     category: "Web Development",

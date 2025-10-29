@@ -309,18 +309,11 @@ export default function Navigation() {
                 </div>
                 <div className="menu-link overflow-hidden">
                   <Link
-                    href="/projects"
+                    href="#work"
+                    onClick={() => handleMenuClick("work")}
                     className="text-4xl lg:text-5xl font-medium leading-tight text-white block transform translate-y-[-110%] will-change-transform  hover:text-primary"
                   >
-                    Projects
-                  </Link>
-                </div>
-                <div className="menu-link overflow-hidden">
-                  <Link
-                    href="/contact"
-                    className="text-4xl lg:text-5xl font-medium leading-tight text-white block transform translate-y-[-110%] will-change-transform  hover:text-primary"
-                  >
-                    Contact
+                    Work
                   </Link>
                 </div>
               </div>
