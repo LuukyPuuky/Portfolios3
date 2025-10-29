@@ -289,10 +289,11 @@ export default function Navigation() {
                     Home
                   </Link>
                 </div>
-                <div className="menu-link overflow-hidden ">
+                <div className="menu-link overflow-hidden">
                   <Link
-                    href="/about"
-                    className="text-4xl lg:text-5xl font-medium leading-tight text-white  block transform translate-y-[-110%] will-change-transform  hover:text-primary"
+                    href="#about"
+                    onClick={() => handleMenuClick("about")}
+                    className="text-4xl lg:text-5xl font-medium leading-tight text-white block transform translate-y-[-110%] will-change-transform hover:text-primary"
                   >
                     About Me
                   </Link>
