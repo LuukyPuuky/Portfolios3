@@ -2,6 +2,7 @@ import Navigation from "@/components/navBar";
 
 import FluidBackground from "@/components/Fluidbackground";
 import AboutmeSection from "@/components/AboutmeSection";
+import VerticalScrollSection from "@/components/VerticalScrollSection";
 import localFont from "next/font/local";
 
 const avantt = localFont({
@@ -18,6 +19,7 @@ export default function Home() {
         <FluidBackground />
       </section>
       <AboutmeSection />
+      <VerticalScrollSection />
     </>
   );
 }
