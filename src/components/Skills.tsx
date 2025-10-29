@@ -16,9 +16,7 @@ export default function Skills() {
 
   return (
     <div className="min-h-screen bg-neutral-900 text-white">
-      {/* Main Content */}
       <main className="max-w-7xl mx-auto px-8 py-16">
-        {/* Header */}
         <h1 className="text-7xl font-bold text-neutral-600 mb-8">Skills</h1>
 
         <p className="text-2xl mb-10 max-w-4xl leading-relaxed">
@@ -32,7 +30,7 @@ export default function Skills() {
             &lt;Coding /&gt;
           </h2>
           <p className="text-neutral-400 text-sm mb-8 max-w-md">
-            These are all of frameworks and languages that I have experience
+            These are all the frameworks and languages that I have experience
             with.
           </p>
 

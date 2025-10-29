@@ -2,10 +2,11 @@ import Navigation from "@/components/navBar";
 
 import FluidBackground from "@/components/Fluidbackground";
 import Skills from "@/components/Skills";
-import VerticalScrollSection from "@/components/VerticalScrollSection";
+
 import localFont from "next/font/local";
 import AboutMe from "@/components/AboutMe";
 import ThreeScene from "@/components/TorusScene";
+import WorkSection from "@/components/WorkSection";
 
 const avantt = localFont({
   src: "./fonts/Avantt-Bold.otf",
@@ -34,11 +35,15 @@ export default function Home() {
           <AboutMe />
         </div>
       </section>
-
       <section id="skills">
         <Skills />
       </section>
-      <VerticalScrollSection />
+      <section
+        className="relative w-screen h-screen bg-linear-to-bl from-black to-primary overflow-hidden  md:flex-row"
+        id="work"
+      >
+        <WorkSection />
+      </section>
     </>
   );
 }
