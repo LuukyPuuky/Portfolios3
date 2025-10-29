@@ -86,7 +86,7 @@ export default function VerticalScrollSection() {
     });
 
     items.forEach((item, index) => {
-      timeline.to(item, { scale: 0.9, borderRadius: "10px" });
+      timeline.to(item, { scale: 1 });
       if (items[index + 1]) {
         timeline.to(
           items[index + 1],

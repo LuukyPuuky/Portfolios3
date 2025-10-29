@@ -1,7 +1,7 @@
 import Navigation from "@/components/navBar";
 
 import FluidBackground from "@/components/Fluidbackground";
-import AboutmeSection from "@/components/AboutmeSection";
+import Skills from "@/components/Skills";
 import VerticalScrollSection from "@/components/VerticalScrollSection";
 import localFont from "next/font/local";
 
@@ -15,10 +15,14 @@ export default function Home() {
       <section
         className={`h-screen flex items-center justify-center p-6 bg-transparent ${avantt.className}`}
       >
+        <section id="home">
+          <FluidBackground />
+        </section>
         <Navigation />
-        <FluidBackground />
       </section>
-      <AboutmeSection />
+      <section id="skills">
+        <Skills />
+      </section>
       <VerticalScrollSection />
     </>
   );

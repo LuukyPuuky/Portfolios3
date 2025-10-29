@@ -192,10 +192,10 @@ export default function Navigation() {
     // Set initial states
     const textElements = [
       ...(menuCol1.current
-        ? Array.from(menuCol1.current.querySelectorAll("a"))
+        ? Array.from(menuCol1.current.querySelectorAll("a, button"))
         : []),
       ...(menuCol2.current
-        ? Array.from(menuCol2.current.querySelectorAll("a"))
+        ? Array.from(menuCol2.current.querySelectorAll("a, button"))
         : []),
       ...(menuFooterCol1.current
         ? Array.from(menuFooterCol1.current.querySelectorAll("p"))
@@ -208,6 +208,18 @@ export default function Navigation() {
     gsap.set(textElements, { y: "-110%" });
   }, []);
 
+  const handleMenuClick = (id: string) => {
+    // Close the menu first
+    closeMenu();
+
+    // Then scroll after a short delay (matches your GSAP close duration)
+    setTimeout(() => {
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 1100); // adjust if your animation is faster/slower
+  };
   return (
     <nav className="fixed top-0 left-0 w-full h-screen pointer-events-none overflow-hidden z-50">
       {/* Menu Bar */}
@@ -240,7 +252,7 @@ export default function Navigation() {
 
       {/* Menu Overlay  background*/}
       <div
-        className="fixed top-0 left-0 w-full h-screen bg-[#0E100F] overflow-hidden z-40 will-change-transform"
+        className="fixed top-0 left-0 w-full h-screen bg-neutral-900 overflow-hidden z-40 will-change-transform"
         ref={menuOverlay}
         style={{ clipPath: "polygon(0 0, 100% 0, 100% 0%, 0% 0%)" }}
       >
@@ -270,8 +282,9 @@ export default function Navigation() {
               <div className="flex flex-col gap-2 flex-3 " ref={menuCol1}>
                 <div className="menu-link overflow-hidden">
                   <Link
-                    href="/"
-                    className="text-4xl lg:text-5xl  font-medium leading-tight text-white block transform translate-y-[-110%] will-change-transform hover:text-primary"
+                    href="#home"
+                    onClick={() => handleMenuClick("home")}
+                    className="text-4xl lg:text-5xl font-medium leading-tight text-white block transform translate-y-[-110%] will-change-transform hover:text-primary"
                   >
                     Home
                   </Link>
@@ -282,6 +295,15 @@ export default function Navigation() {
                     className="text-4xl lg:text-5xl font-medium leading-tight text-white  block transform translate-y-[-110%] will-change-transform  hover:text-primary"
                   >
                     About Me
+                  </Link>
+                </div>
+                <div className="menu-link overflow-hidden">
+                  <Link
+                    href="#skills"
+                    onClick={() => handleMenuClick("skills")}
+                    className="text-4xl lg:text-5xl font-medium leading-tight text-white block transform translate-y-[-110%] will-change-transform hover:text-primary"
+                  >
+                    Skills
                   </Link>
                 </div>
                 <div className="menu-link overflow-hidden">
