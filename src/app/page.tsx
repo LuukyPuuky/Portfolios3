@@ -7,6 +7,8 @@ import localFont from "next/font/local";
 import AboutMe from "@/components/AboutMe";
 import ThreeScene from "@/components/TorusScene";
 import WorkSection from "@/components/WorkSection";
+import ContactForm from "@/components/contact";
+import Footer from "@/components/footer";
 
 const avantt = localFont({
   src: "./fonts/Avantt-Bold.otf",
@@ -44,6 +46,15 @@ export default function Home() {
       >
         <WorkSection />
       </section>
+      <section
+        id="contact"
+        className="w-screen h-screen bg-neutral-900 overflow-hidden  md:flex-row"
+      >
+        <ContactForm />
+      </section>
+      <div className="bg-neutral-900">
+        <Footer />
+      </div>
     </>
   );
 }

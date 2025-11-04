@@ -321,7 +321,7 @@ export default function Navigation() {
               <div className="flex flex-col gap-2 flex-2" ref={menuCol2}>
                 <div className="menu-tag overflow-hidden">
                   <a
-                    href="https://github.com"
+                    href="https://github.com/luukypuuky"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xl lg:text-2xl font-medium text-gray-400 block transform translate-y-[-110%] will-change-transform  hover:text-primary"
@@ -331,7 +331,7 @@ export default function Navigation() {
                 </div>
                 <div className="menu-tag overflow-hidden">
                   <a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/luuk-steijaert-028702287/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xl lg:text-2xl font-medium text-gray-400 block transform translate-y-[-110%] will-change-transform  hover:text-primary"
@@ -341,7 +341,7 @@ export default function Navigation() {
                 </div>
                 <div className="menu-tag overflow-hidden">
                   <a
-                    href="mailto:example@mail.com"
+                    href="mailto:luukwillem@gmail.com"
                     className="text-xl lg:text-2xl font-medium text-gray-400 block transform translate-y-[-110%] will-change-transform  hover:text-primary"
                   >
                     Mail
