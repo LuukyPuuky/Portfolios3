@@ -46,7 +46,7 @@ const AnimatedLink: React.FC<AnimatedLinkProps> = ({
       {
         y: "0%",
         stagger: 0.03,
-        duration: 0.4,
+        duration: 0.2,
         ease: "power2.inOut",
       },
       "-=0.4"

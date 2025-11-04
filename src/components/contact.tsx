@@ -118,7 +118,6 @@ export default function ContactSection() {
             <AnimatedLink href="mailto:luukwillem@gmail.com">
               luukwillem@gmail.com
             </AnimatedLink>
-            <span>+31 6 80078320</span>
           </div>
         </div>
       </div>

@@ -316,6 +316,15 @@ export default function Navigation() {
                     Work
                   </Link>
                 </div>
+                <div className="menu-link overflow-hidden">
+                  <Link
+                    href="#contact"
+                    onClick={() => handleMenuClick("contact")}
+                    className="text-4xl lg:text-5xl font-medium leading-tight text-white block transform translate-y-[-110%] will-change-transform  hover:text-primary"
+                  >
+                    Contact
+                  </Link>
+                </div>
               </div>
 
               <div className="flex flex-col gap-2 flex-2" ref={menuCol2}>
@@ -358,9 +367,6 @@ export default function Navigation() {
                 </p>
               </div>
               <div className="flex flex-col gap-1 flex-2" ref={menuFooterCol2}>
-                <p className="text-sm font-medium text-gray-400 transform translate-y-[-110%] will-change-transform">
-                  +31 6 80078320
-                </p>
                 <p className="text-sm font-medium text-gray-400 transform translate-y-[-110%] will-change-transform">
                   luukwillem@gmail.com
                 </p>
