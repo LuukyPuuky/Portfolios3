@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import AnimatedLink from "./AnimatedLink";
+// import AnimatedLink from "./AnimatedLink";
 
 interface ContactFormData {
   name: string;
@@ -115,9 +115,7 @@ export default function ContactSection() {
               Get in touch
             </h3>
 
-            <AnimatedLink href="mailto:luukwillem@gmail.com">
-              luukwillem@gmail.com
-            </AnimatedLink>
+            <a href="mailto:luukwillem@gmail.com">luukwillem@gmail.com</a>
           </div>
         </div>
       </div>
