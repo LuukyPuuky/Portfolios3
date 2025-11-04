@@ -18,7 +18,7 @@ export const PROJECTS: Project[] = [
     title: "Branding",
     links: [
       { label: "GitHub", url: "https://github.com/branding-project" },
-      { label: "View Project", url: "https://branding-project.com" },
+      { label: "View Project", url: "Branding" },
     ],
     imageUrl: "/projects/branding.png",
     category: "Design",
