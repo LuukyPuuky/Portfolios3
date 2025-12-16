@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { PROJECTS } from "../app/projectcontent";
+import Link from "next/link";
+import { PROJECTS } from "@/app/projectcontent";
 import AnimatedLink from "./AnimatedLink";
 import Image from "next/image";
 import gsap from "gsap";
@@ -19,22 +20,45 @@ const ProjectItem: React.FC<{
   project: Project;
   setActiveProject: (project: Project | null) => void;
 }> = ({ project, setActiveProject }) => {
+  const hasDetailPage = project.links.some((link) =>
+    link.url.startsWith("/projects/")
+  );
+  const detailPageUrl = project.links.find((link) =>
+    link.url.startsWith("/projects/")
+  )?.url;
+
   return (
     <div
       className="group w-full py-8 border-b border-zinc-700/50 hover:border-zinc-500 transition-colors duration-300 flex justify-between items-center flex-wrap gap-4 cursor-pointer"
       onMouseEnter={() => setActiveProject(project)}
       onMouseLeave={() => setActiveProject(null)}
     >
-      <h2 className="text-3xl md:text-4xl font-semibold tracking-tight transition-transform duration-300 group-hover:-translate-x-2 text-white">
+      <Link
+        href={detailPageUrl || "#"}
+        className="flex-1 text-3xl md:text-4xl font-semibold tracking-tight transition-transform duration-300 group-hover:-translate-x-2 text-white hover:opacity-70"
+      >
         {project.title}
-      </h2>
+      </Link>
       <div className="flex flex-col items-end gap-2 ml-auto text-right">
         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-end gap-1">
-          {project.links.map((link) => (
-            <AnimatedLink key={link.url} href={link.url} className="text-base">
-              {link.label}
-            </AnimatedLink>
-          ))}
+          {project.links.map((link) => {
+            if (link.label === "View Project" && hasDetailPage) {
+              return null;
+            }
+
+            return (
+              <AnimatedLink
+                key={link.url}
+                href={link.url}
+                className="text-base"
+              >
+                {link.label}
+              </AnimatedLink>
+            );
+          })}
+          {hasDetailPage && (
+            <span className="text-sm opacity-70">View Project →</span>
+          )}
         </div>
         <div className="text-zinc-500 text-sm group-hover:opacity-0 transition-opacity duration-300">
           {project.category} / {project.year}
@@ -45,6 +69,8 @@ const ProjectItem: React.FC<{
 };
 
 const WorkSection = () => {
+  const projectsArray = Array.isArray(PROJECTS) ? PROJECTS : [];
+
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const cursorLabelRef = useRef<HTMLDivElement>(null);
   const xMoveCursor = useRef<gsap.QuickToFunc | null>(null);
@@ -84,7 +110,7 @@ const WorkSection = () => {
           ))}
         </div>
       </div>
-      
+
       {/* Floating Image Container */}
       <div
         ref={cursorLabelRef}
@@ -93,15 +119,15 @@ const WorkSection = () => {
         }`}
       >
         <div className="relative w-full h-full bg-zinc-800">
-             {activeProject && (
-                <Image
-                src={activeProject.imageUrl}
-                alt={activeProject.title}
-                fill
-                className="object-cover"
-                priority
-                />
-            )}
+          {activeProject && (
+            <Image
+              src={activeProject.imageUrl}
+              alt={activeProject.title}
+              fill
+              className="object-cover"
+              priority
+            />
+          )}
         </div>
       </div>
     </section>
