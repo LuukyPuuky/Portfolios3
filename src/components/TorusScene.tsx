@@ -3,6 +3,7 @@
 import React, { useRef, useEffect } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 const ThreeScene: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -23,7 +24,7 @@ const ThreeScene: React.FC = () => {
       0.1,
       1000
     );
-    camera.position.z = 15;
+    camera.position.z = 5;
 
     // Renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -38,44 +39,44 @@ const ThreeScene: React.FC = () => {
     controls.screenSpacePanning = false;
     controls.enableZoom = false;
     controls.enablePan = true;
-    const initialDistance = camera.position.length();
-    controls.minDistance = initialDistance;
-    controls.maxDistance = initialDistance;
 
-    // Geometry
-    const geometry = new THREE.TorusKnotGeometry(4, 1.2, 150, 20, 2, 3);
+    // Load GLB Model
+    let model: THREE.Group | null = null;
+    const loader = new GLTFLoader();
 
-    // Apply vertex colors for gradient effect
-    geometry.computeBoundingBox();
-    const boundingBox = geometry.boundingBox;
-    if (boundingBox) {
-      const positions = geometry.attributes.position;
-      const colors = new Float32Array(positions.count * 3);
-      const color1 = new THREE.Color("#000000");
-      const color2 = new THREE.Color("#0039cf");
+    loader.load(
+      "/Luuk-st-LOGO.glb",
+      (gltf: any) => {
+        const object = gltf.scene;
+        model = object;
 
-      for (let i = 0; i < positions.count; i++) {
-        const y = positions.getY(i);
-        const mixFactor =
-          (y - boundingBox.min.y) / (boundingBox.max.y - boundingBox.min.y);
+        object.scale.set(2, 2, 2);
 
-        const mixedColor = color1.clone().lerp(color2, mixFactor);
+        // Center the model
+        const box = new THREE.Box3().setFromObject(object);
+        const center = box.getCenter(new THREE.Vector3());
+        object.position.sub(center); // Center the model at (0,0,0)
 
-        colors[i * 3] = mixedColor.r;
-        colors[i * 3 + 1] = mixedColor.g;
-        colors[i * 3 + 2] = mixedColor.b;
+        // Apply material to all meshes in the model
+        object.traverse((child: any) => {
+          if (child.isMesh) {
+            child.material = new THREE.MeshStandardMaterial({
+              color: child.material.color,
+              metalness: 0.9,
+              roughness: 0.2,
+            });
+          }
+        });
+
+        scene.add(object);
+      },
+      (xhr: any) => {
+        console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+      },
+      (error: any) => {
+        console.error("An error happened loading the GLB:", error);
       }
-      geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-    }
-
-    // Material
-    const material = new THREE.MeshStandardMaterial({
-      vertexColors: true,
-      metalness: 0.9,
-      roughness: 0.2,
-    });
-    const torusKnot = new THREE.Mesh(geometry, material);
-    scene.add(torusKnot);
+    );
 
     // Lights
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -102,8 +103,9 @@ const ThreeScene: React.FC = () => {
     const animate = () => {
       animationFrameId.current = requestAnimationFrame(animate);
 
-      torusKnot.rotation.x += 0.001;
-      torusKnot.rotation.y += 0.005;
+      if (model) {
+        model.rotation.y += 0.005; // Rotate the model
+      }
 
       controls.update();
       renderer.render(scene, camera);
@@ -117,9 +119,21 @@ const ThreeScene: React.FC = () => {
         cancelAnimationFrame(animationFrameId.current);
       }
 
-      scene.remove(torusKnot);
-      geometry.dispose();
-      material.dispose();
+      if (model) {
+        scene.remove(model);
+        // Traverse and dispose geometries/materials to avoid leaks
+        model.traverse((child) => {
+          if ((child as THREE.Mesh).isMesh) {
+            const mesh = child as THREE.Mesh;
+            mesh.geometry.dispose();
+            if (Array.isArray(mesh.material)) {
+              mesh.material.forEach((m) => m.dispose());
+            } else {
+              mesh.material.dispose();
+            }
+          }
+        });
+      }
 
       if (container) {
         container.removeChild(renderer.domElement);
