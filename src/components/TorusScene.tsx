@@ -46,6 +46,7 @@ const ThreeScene: React.FC = () => {
 
     loader.load(
       "/Luuk-st-LOGO.glb",
+      // eslint-disable-next-line
       (gltf: any) => {
         const object = gltf.scene;
         model = object;
@@ -58,6 +59,7 @@ const ThreeScene: React.FC = () => {
         object.position.sub(center); // Center the model at (0,0,0)
 
         // Apply material to all meshes in the model
+        // eslint-disable-next-line
         object.traverse((child: any) => {
           if (child.isMesh) {
             child.material = new THREE.MeshStandardMaterial({
@@ -70,9 +72,11 @@ const ThreeScene: React.FC = () => {
 
         scene.add(object);
       },
+      // eslint-disable-next-line
       (xhr: any) => {
         console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
       },
+      // eslint-disable-next-line
       (error: any) => {
         console.error("An error happened loading the GLB:", error);
       }
