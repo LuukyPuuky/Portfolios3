@@ -69,7 +69,7 @@ const ProjectItem: React.FC<{
 };
 
 const WorkSection = () => {
-  const projectsArray = Array.isArray(PROJECTS) ? PROJECTS : [];
+  // const projectsArray = Array.isArray(PROJECTS) ? PROJECTS : [];
 
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const cursorLabelRef = useRef<HTMLDivElement>(null);
