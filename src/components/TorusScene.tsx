@@ -38,7 +38,7 @@ const ThreeScene: React.FC = () => {
     controls.dampingFactor = 0.05;
     controls.screenSpacePanning = false;
     controls.enableZoom = false;
-    controls.enablePan = true;
+    controls.enablePan = false;
 
     // Load GLB Model
     let model: THREE.Group | null = null;
@@ -58,12 +58,42 @@ const ThreeScene: React.FC = () => {
         const center = box.getCenter(new THREE.Vector3());
         object.position.sub(center); // Center the model at (0,0,0)
 
+    
+        const color2 = new THREE.Color("#0039cf");
+
         // Apply material to all meshes in the model
         // eslint-disable-next-line
         object.traverse((child: any) => {
           if (child.isMesh) {
+            const geometry = child.geometry;
+            geometry.computeBoundingBox();
+            const boundingBox = geometry.boundingBox;
+
+            if (boundingBox) {
+              const positions = geometry.attributes.position;
+              const colors = new Float32Array(positions.count * 3);
+              const tempColor = new THREE.Color();
+
+              for (let i = 0; i < positions.count; i++) {
+                const y = positions.getY(i);
+                const mixFactor =
+                  (y - boundingBox.min.y) /
+                  (boundingBox.max.y - boundingBox.min.y);
+
+                tempColor.copy(color2).lerp(color2, mixFactor);
+
+                colors[i * 3] = tempColor.r;
+                colors[i * 3 + 1] = tempColor.g;
+                colors[i * 3 + 2] = tempColor.b;
+              }
+              geometry.setAttribute(
+                "color",
+                new THREE.BufferAttribute(colors, 3)
+              );
+            }
+
             child.material = new THREE.MeshStandardMaterial({
-              color: child.material.color,
+              vertexColors: true,
               metalness: 0.9,
               roughness: 0.2,
             });
