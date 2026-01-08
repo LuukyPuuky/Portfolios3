@@ -2,7 +2,7 @@
 
 const AboutMe = () => {
   return (
-    <div className="flex flex-col justify-center h-full text-white p-8 md:p-16 space-y-6">
+    <div className="flex flex-col justify-center h-full text-white p-8 mt-8 md:p-16 space-y-6">
       <h2 className="text-4xl md:text-5xl font-bold tracking-wider mb-4">
         About Me
       </h2>
