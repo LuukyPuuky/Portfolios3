@@ -58,7 +58,6 @@ const ThreeScene: React.FC = () => {
         const center = box.getCenter(new THREE.Vector3());
         object.position.sub(center); // Center the model at (0,0,0)
 
-    
         const color2 = new THREE.Color("#0039cf");
 
         // Apply material to all meshes in the model
@@ -113,14 +112,18 @@ const ThreeScene: React.FC = () => {
     );
 
     // Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
     scene.add(ambientLight);
 
-    const pointLight1 = new THREE.PointLight(0x00bfff, 30, 100);
+    const frontLight = new THREE.DirectionalLight(0xffffff, 3);
+    frontLight.position.set(0, 0, 10);
+    scene.add(frontLight);
+
+    const pointLight1 = new THREE.PointLight(0x00bfff, 50, 100);
     pointLight1.position.set(10, 10, 10);
     scene.add(pointLight1);
 
-    const pointLight2 = new THREE.PointLight(0xff00ff, 30, 100);
+    const pointLight2 = new THREE.PointLight(0xff00ff, 50, 100);
     pointLight2.position.set(-10, -10, 5);
     scene.add(pointLight2);
 
