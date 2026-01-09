@@ -28,7 +28,7 @@ export default function Home() {
       </section>
       <section
         id="about"
-        className="relative w-screen min-h-screen md:h-screen bg-linear-to-bl from-black to-primary overflow-hidden flex flex-col md:flex-row"
+        className="relative w-full min-h-screen md:h-screen bg-linear-to-bl from-black to-primary overflow-hidden flex flex-col md:flex-row"
       >
         <div className="relative w-full md:w-1/2 h-[50vh] md:h-full">
           <ThreeScene />
@@ -38,7 +38,7 @@ export default function Home() {
         </div>
       </section>
       <section
-        className="relative w-screen h-screen bg-linear-to-bl from-black to-primary overflow-hidden  md:flex-row"
+        className="relative w-full h-screen bg-linear-to-bl from-black to-primary overflow-hidden  md:flex-row"
         id="work"
       >
         <div
@@ -54,7 +54,7 @@ export default function Home() {
 
       <section
         id="contact"
-        className="w-screen h-screen bg-neutral-900 overflow-hidden  md:flex-row"
+        className="w-full h-screen bg-neutral-900 overflow-hidden  md:flex-row"
       >
         <ContactForm />
       </section>
