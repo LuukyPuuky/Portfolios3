@@ -37,15 +37,21 @@ export default function Home() {
           <AboutMe />
         </div>
       </section>
-      <section id="skills">
-        <Skills />
-      </section>
       <section
         className="relative w-screen h-screen bg-linear-to-bl from-black to-primary overflow-hidden  md:flex-row"
         id="work"
       >
+        <div
+          className={` mt-20 flex items-center justify-center  bg-transparent text-4xl text-white ${avantt.className}`}
+        >
+          My Work
+        </div>
         <WorkSection />
       </section>
+      <section id="skills">
+        <Skills />
+      </section>
+
       <section
         id="contact"
         className="w-screen h-screen bg-neutral-900 overflow-hidden  md:flex-row"
