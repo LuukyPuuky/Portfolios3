@@ -28,12 +28,12 @@ export default function Home() {
       </section>
       <section
         id="about"
-        className="relative w-screen h-screen bg-linear-to-bl from-black to-primary overflow-hidden flex flex-col md:flex-row"
+        className="relative w-screen min-h-screen md:h-screen bg-linear-to-bl from-black to-primary overflow-hidden flex flex-col md:flex-row"
       >
-        <div className="relative w-full md:w-1/2 h-1/2 md:h-full">
+        <div className="relative w-full md:w-1/2 h-[50vh] md:h-full">
           <ThreeScene />
         </div>
-        <div className="relative z-10 w-full md:w-1/2 h-1/2 md:h-full overflow-y-auto flex items-center">
+        <div className="relative z-10 w-full md:w-1/2 h-auto md:h-full flex items-center">
           <AboutMe />
         </div>
       </section>
