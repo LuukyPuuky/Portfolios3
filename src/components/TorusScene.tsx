@@ -141,7 +141,7 @@ const ThreeScene: React.FC = () => {
       animationFrameId.current = requestAnimationFrame(animate);
 
       if (model) {
-        model.rotation.y += 0.005; // Rotate the model
+        model.rotation.y += -0.002; // Rotate the model
       }
 
       controls.update();
