@@ -119,6 +119,10 @@ const ThreeScene: React.FC = () => {
     frontLight.position.set(0, 0, 10);
     scene.add(frontLight);
 
+    const backLight = new THREE.DirectionalLight(0xffffff, 3);
+    backLight.position.set(0, 0, -10);
+    scene.add(backLight);
+
     const pointLight1 = new THREE.PointLight(0x00bfff, 50, 100);
     pointLight1.position.set(10, 10, 10);
     scene.add(pointLight1);
