@@ -1,31 +1,28 @@
-/* eslint-disable */
 "use client";
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "@studio-freight/lenis";
 
-const HeroCanvas = () => {
-  const canvasRef = useRef(null);
-  const headerRef = useRef(null);
-  const canvasWrapRef = useRef(null);
+const HeroCanvas: React.FC = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const canvasWrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    const lenis = new Lenis();
-    lenis.on("scroll", ScrollTrigger.update);
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(0);
-
     const canvas = canvasRef.current;
     const header = headerRef.current;
     const canvasWrap = canvasWrapRef.current;
-    const context = canvas.getContext("2d");
 
+    // Null checks
+    if (!canvas || !header || !canvasWrap) return;
+
+    const context = canvas.getContext("2d");
+    if (!context) return;
+
+    // Canvas setup
     const setCanvasSize = () => {
       const pixelRatio = window.devicePixelRatio || 1;
       const rect = canvas.getBoundingClientRect();
@@ -39,18 +36,20 @@ const HeroCanvas = () => {
 
     setCanvasSize();
 
+    // Load frames
     const frameCount = 250;
-    const currentFrame = (index) =>
+    const currentFrame = (index: number) =>
       `/frames/frame_${String(index + 1).padStart(4, "0")}.jpg`;
 
-    let images = [];
+    const images: HTMLImageElement[] = [];
+    // eslint-disable-next-line prefer-const
     let videoFrames = { frame: 0 };
     let imagesToLoad = frameCount;
 
     const onLoad = () => {
       imagesToLoad--;
-      if (!imagesToLoad) {
-        render();
+      if (imagesToLoad <= 0) {
+        renderFrame();
         setupScrollTrigger();
       }
     };
@@ -63,7 +62,8 @@ const HeroCanvas = () => {
       images.push(img);
     }
 
-    const render = () => {
+    // Render function
+    const renderFrame = () => {
       const rect = canvas.getBoundingClientRect();
       const canvasWidth = rect.width;
       const canvasHeight = rect.height;
@@ -71,28 +71,29 @@ const HeroCanvas = () => {
       context.clearRect(0, 0, canvasWidth, canvasHeight);
 
       const img = images[videoFrames.frame];
-      if (img && img.complete && img.naturalWidth > 0) {
-        const imageAspect = img.naturalWidth / img.naturalHeight;
-        const canvasAspect = canvasWidth / canvasHeight;
+      if (!img || !img.complete || img.naturalWidth === 0) return;
 
-        let drawWidth, drawHeight, drawX, drawY;
+      const imageAspect = img.naturalWidth / img.naturalHeight;
+      const canvasAspect = canvasWidth / canvasHeight;
 
-        if (imageAspect > canvasAspect) {
-          drawHeight = canvasHeight;
-          drawWidth = drawHeight * imageAspect;
-          drawX = (canvasWidth - drawWidth) / 2;
-          drawY = 0;
-        } else {
-          drawWidth = canvasWidth;
-          drawHeight = drawWidth / imageAspect;
-          drawX = 0;
-          drawY = (canvasHeight - drawHeight) / 2;
-        }
+      let drawWidth: number, drawHeight: number, drawX: number, drawY: number;
 
-        context.drawImage(img, drawX, drawY, drawWidth, drawHeight);
+      if (imageAspect > canvasAspect) {
+        drawHeight = canvasHeight;
+        drawWidth = drawHeight * imageAspect;
+        drawX = (canvasWidth - drawWidth) / 2;
+        drawY = 0;
+      } else {
+        drawWidth = canvasWidth;
+        drawHeight = drawWidth / imageAspect;
+        drawX = 0;
+        drawY = (canvasHeight - drawHeight) / 2;
       }
+
+      context.drawImage(img, drawX, drawY, drawWidth, drawHeight);
     };
 
+    // ScrollTrigger setup
     const setupScrollTrigger = () => {
       ScrollTrigger.create({
         trigger: ".hero",
@@ -104,9 +105,8 @@ const HeroCanvas = () => {
         onUpdate: (self) => {
           const progress = self.progress;
           const animationProgress = Math.min(progress / 0.9, 1);
-          const targetFrame = Math.round(animationProgress * (frameCount - 1));
-          videoFrames.frame = targetFrame;
-          render();
+          videoFrames.frame = Math.round(animationProgress * (frameCount - 1));
+          renderFrame();
 
           if (progress <= 0.25) {
             const zProgress = progress / 0.25;
@@ -114,7 +114,7 @@ const HeroCanvas = () => {
 
             let opacity = 1;
             if (progress >= 0.2) {
-              const fadeProgress = Math.min((progress - 0.2) / (0.25 - 0.2), 1);
+              const fadeProgress = Math.min((progress - 0.2) / 0.05, 1);
               opacity = 1 - fadeProgress;
             }
 
@@ -143,7 +143,7 @@ const HeroCanvas = () => {
 
     window.addEventListener("resize", () => {
       setCanvasSize();
-      render();
+      renderFrame();
       ScrollTrigger.refresh();
     });
   }, []);
@@ -173,10 +173,6 @@ const HeroCanvas = () => {
             </p>
           </div>
         </div>
-      </section>
-
-      <section className="outro flex justify-center items-center text-center text-black bg-white w-screen h-screen">
-        <h2>placeholder text for space</h2>
       </section>
     </>
   );
