@@ -17,7 +17,7 @@ export default function Skills() {
   return (
     <div className="min-h-screen bg-neutral-900 text-white">
       <main className="max-w-7xl mx-auto px-8 py-16">
-        <h1 className="text-7xl font-bold text-neutral-600 mb-8">Skills</h1>
+        <h1 className="text-7xl font-bold text-white mb-8">Skills</h1>
 
         <p className="text-2xl mb-10 max-w-4xl leading-relaxed">
           Thinking about working with me? Check out what I can do below and see

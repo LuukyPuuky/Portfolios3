@@ -32,7 +32,7 @@ export const PROJECTS: Project[] = [
     title: "Project OWOW",
     links: [
       { label: "GitHub", url: "https://github.com/project-owow" },
-      { label: "View Project", url: "/projects/project-owow" },
+      { label: "View Project", url: "/projects/owow" },
     ],
     imageUrl: "/projects/project-owow.png",
     category: "Web Development",
@@ -65,18 +65,11 @@ export const PROJECT_DETAILS = [
         src: "/projects/branding.png",
         alt: "Branding project 1",
       },
-      // Add more gallery items as needed
     ],
     results: [
       { value: "95%", label: "Client Satisfaction" },
       { value: "100%", label: "Brand Guidelines Adoption" },
     ],
-    contactInfo: {
-      email: "contact@yoursite.com",
-      instagram: "https://instagram.com/yourprofile",
-      behance: "https://behance.net/yourprofile",
-      linkedin: "https://linkedin.com/in/yourprofile",
-    },
   },
   {
     id: "2",
@@ -100,19 +93,11 @@ export const PROJECT_DETAILS = [
         src: "/projects/project-owow.png",
         alt: "Project OWOW 1",
       },
-      // Add more gallery items as needed
     ],
     results: [
       { value: "50ms", label: "Page Load Time" },
       { value: "98%", label: "Lighthouse Score" },
     ],
-    contactInfo: {
-      email: "contact@yoursite.com",
-      instagram: "https://instagram.com/yourprofile",
-      behance: "https://behance.net/yourprofile",
-      linkedin: "https://linkedin.com/in/yourprofile",
-    },
   },
-  // Add more projects here
 ];
 export default PROJECT_DETAILS;
