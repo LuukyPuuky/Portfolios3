@@ -1,10 +1,12 @@
-import React from 'react'
-import Marquee from '@/components/Marquee'
+import React from "react";
+import VideoMask from "@/components/Mask";
 
 const personalproject = () => {
   return (
-    <Marquee/>
-  )
-}
+    <>
+      <VideoMask />
+    </>
+  );
+};
 
-export default personalproject
+export default personalproject;
