@@ -150,7 +150,7 @@ const HeroCanvas: React.FC = () => {
 
   return (
     <>
-      <section className="hero relative w-screen h-screen overflow-hidden">
+      <div className="hero relative w-screen h-screen overflow-hidden">
         <div
           ref={canvasWrapRef}
           className="canvas-wrap absolute inset-0 overflow-hidden will-change-transform will-change-border-radius"
@@ -173,7 +173,7 @@ const HeroCanvas: React.FC = () => {
             </p>
           </div>
         </div>
-      </section>
+      </div>
     </>
   );
 };

@@ -17,27 +17,27 @@ export default function VideoMask() {
   const state = useRef<Map<HTMLDivElement, MaskState>>(new Map());
 
   useEffect(() => {
+    const container = containerRef.current!;
     const video = videoRef.current!;
-    const globalHud = hudRef.current!;
+    const hud = hudRef.current!;
     const masks = masksRef.current;
 
     let isHoveringMask = false;
     let zIndexCounter = 10;
     let hasInitialized = false;
 
-    /* ---------------- HUD ---------------- */
+    // ---------------- HUD ----------------
     const onMouseMove = (e: MouseEvent) => {
       if (!isHoveringMask) {
-        globalHud.innerHTML = `X: ${e.clientX}px<br/>Y: ${e.clientY}px`;
+        hud.innerHTML = `X: ${e.clientX}px<br/>Y: ${e.clientY}px`;
       }
-      globalHud.style.transform = `translate3d(${e.clientX + 2}px, ${
+      hud.style.transform = `translate3d(${e.clientX + 2}px, ${
         e.clientY + 2
       }px, 0)`;
     };
-
     document.addEventListener("mousemove", onMouseMove);
 
-    /* ---------------- Helpers ---------------- */
+    // ---------------- Helpers ----------------
     const updateCoords = (mask: HTMLDivElement) => {
       const s = state.current.get(mask)!;
       mask.querySelector(".coords")!.textContent = `X: ${Math.round(
@@ -47,21 +47,23 @@ export default function VideoMask() {
 
     const drawClipped = (ctx: CanvasRenderingContext2D, rect: MaskState) => {
       if (!video.videoWidth || !video.videoHeight) return;
+
       const videoAspect = video.videoWidth / video.videoHeight;
-      const windowAspect = window.innerWidth / window.innerHeight;
+      const containerRect = container.getBoundingClientRect();
+      const containerAspect = containerRect.width / containerRect.height;
 
       let dw, dh, dx, dy;
 
-      if (videoAspect > windowAspect) {
-        dh = window.innerHeight;
+      if (videoAspect > containerAspect) {
+        dh = containerRect.height;
         dw = dh * videoAspect;
-        dx = (window.innerWidth - dw) / 2;
+        dx = (containerRect.width - dw) / 2;
         dy = 0;
       } else {
-        dw = window.innerWidth;
+        dw = containerRect.width;
         dh = dw / videoAspect;
         dx = 0;
-        dy = (window.innerHeight - dh) / 2;
+        dy = (containerRect.height - dh) / 2;
       }
 
       const scaleX = video.videoWidth / dw;
@@ -81,23 +83,21 @@ export default function VideoMask() {
     };
 
     const initMasks = () => {
+      const rect = container.getBoundingClientRect();
+
       masks.forEach((mask) => {
-        const rect = mask.getBoundingClientRect();
-
-        state.current.set(mask, {
-          x: rect.left,
-          y: rect.top,
-          w: rect.width,
-          h: rect.height,
-        });
-
-        mask.style.transform = `translate3d(${rect.left}px, ${rect.top}px, 0)`;
-        mask.style.left = "0px";
-        mask.style.top = "0px";
+        const s: MaskState = {
+          x: Math.random() * (rect.width - mask.offsetWidth),
+          y: Math.random() * (rect.height - mask.offsetHeight),
+          w: mask.offsetWidth,
+          h: mask.offsetHeight,
+        };
+        state.current.set(mask, s);
+        mask.style.transform = `translate3d(${s.x}px, ${s.y}px, 0)`;
 
         mask.addEventListener("mouseenter", () => {
           isHoveringMask = true;
-          globalHud.textContent = "GRAB";
+          hud.textContent = "GRAB";
         });
 
         mask.addEventListener("mouseleave", () => {
@@ -120,16 +120,14 @@ export default function VideoMask() {
         const s = state.current.get(mask)!;
         const canvas = mask.querySelector("canvas")!;
         const ctx = canvas.getContext("2d")!;
-
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawClipped(ctx, s);
         updateCoords(mask);
       });
-
       requestAnimationFrame(draw);
     };
 
-    /* ---------------- Drag ---------------- */
+    // ---------------- Drag ----------------
     masks.forEach((mask) => {
       let dragging = false;
       let ox = 0,
@@ -147,8 +145,15 @@ export default function VideoMask() {
       mask.addEventListener("mousemove", (e) => {
         if (!dragging) return;
         const s = state.current.get(mask)!;
-        s.x = e.clientX - ox;
-        s.y = e.clientY - oy;
+        const rect = container.getBoundingClientRect();
+        s.x = Math.min(
+          Math.max(e.clientX - rect.left - ox, 0),
+          rect.width - s.w
+        );
+        s.y = Math.min(
+          Math.max(e.clientY - rect.top - oy, 0),
+          rect.height - s.h
+        );
         mask.style.transform = `translate3d(${s.x}px, ${s.y}px, 0)`;
       });
 
@@ -158,36 +163,19 @@ export default function VideoMask() {
       });
     });
 
-    /* ---------------- Init ---------------- */
-    const randomizePositions = () => {
-      masks.forEach((mask) => {
-        const maxX = window.innerWidth - mask.offsetWidth;
-        const maxY = window.innerHeight - mask.offsetHeight;
-
-        mask.style.left = `${Math.random() * maxX}px`;
-        mask.style.top = `${Math.random() * maxY}px`;
-      });
-    };
-
+    // ---------------- Init ----------------
     const init = () => {
       if (hasInitialized) return;
       hasInitialized = true;
-      console.log("VideoMaskHero initialized");
-
-      randomizePositions();
+      console.log("VideoMask initialized");
       initMasks();
       initCanvas();
       draw();
     };
 
     video.addEventListener("playing", init);
-
-    // Check if already ready or playing
-    if (video.readyState >= 2 || !video.paused) {
-      init();
-    } else {
-      video.play().catch((e) => console.log("Autoplay blocked/failed", e));
-    }
+    if (video.readyState >= 2 || !video.paused) init();
+    else video.play().catch(() => {});
 
     return () => {
       document.removeEventListener("mousemove", onMouseMove);
@@ -197,7 +185,7 @@ export default function VideoMask() {
   return (
     <div
       ref={containerRef}
-      className="relative h-screen w-full overflow-hidden bg-black"
+      className="relative w-full h-screen overflow-hidden bg-black"
     >
       <div
         ref={hudRef}
@@ -211,7 +199,7 @@ export default function VideoMask() {
         loop
         muted
         playsInline
-        className="absolute top-0 left-0 h-full w-full object-cover opacity-0 pointer-events-none"
+        className="absolute top-0 left-0 w-full h-full object-cover opacity-0 pointer-events-none"
       />
 
       {[
@@ -229,7 +217,7 @@ export default function VideoMask() {
           }}
           className={`absolute border border-zinc-600 cursor-grab ${size}`}
         >
-          <canvas className="block h-full w-full" />
+          <canvas className="block w-full h-full" />
           <div className="coords absolute -top-5 left-0 bg-zinc-700/70 px-2 py-0.5 font-mono text-xs text-white">
             X: 0px Y: 0px
           </div>
