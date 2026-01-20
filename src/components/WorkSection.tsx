@@ -12,8 +12,6 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// app/projectcontent.ts
-
 interface ProjectLink {
   label: string;
   url: string;
@@ -75,9 +73,6 @@ const ProjectItem: React.FC<{
   project: Project;
   setActiveProject: (project: Project | null) => void;
 }> = ({ project, setActiveProject }) => {
-  const hasDetailPage = project.links.some((link) =>
-    link.url.startsWith("/projects/"),
-  );
   const detailPageUrl = project.links.find((link) =>
     link.url.startsWith("/projects/"),
   )?.url;
@@ -108,7 +103,7 @@ const ProjectItem: React.FC<{
             );
           })}
         </div>
-        <div className="text-zinc-500 text-sm group-hover:opacity-0 transition-opacity duration-300">
+        <div className="text-zinc-500 text-sm">
           {project.category} / {project.year}
         </div>
       </div>

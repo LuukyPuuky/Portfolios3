@@ -2,23 +2,14 @@
 "use client";
 
 import React from "react";
-import { ProjectContent, ProjectData } from "@/components/ProjectContents";
-import { PROJECT_DETAILS } from "@/app/projectcontent";
 
 const BrandingPage = () => {
-  const project = PROJECT_DETAILS.find(
-    (p) => p.slug === "branding"
-  ) as ProjectData;
-  const currentIndex = PROJECT_DETAILS.findIndex((p) => p.slug === "branding");
-  const nextProject = PROJECT_DETAILS[currentIndex + 1] as
-    | ProjectData
-    | undefined;
-
-  if (!project) {
-    return <div>Project not found</div>;
-  }
-
-  return <ProjectContent project={project} nextProject={nextProject} />;
+  return (
+    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center">
+      <h1 className="text-4xl md:text-6xl font-bold mb-4">Branding Project</h1>
+      <p className="text-zinc-400">Content coming soon...</p>
+    </div>
+  );
 };
 
 export default BrandingPage;
