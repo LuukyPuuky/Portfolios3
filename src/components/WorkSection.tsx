@@ -2,10 +2,65 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { PROJECTS } from "@/app/projectcontent";
-import AnimatedLink from "./AnimatedLink";
 import Image from "next/image";
 import gsap from "gsap";
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
+import AnimatedLink from "./AnimatedLink";
+
+// Register ScrollTrigger
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+// app/projectcontent.ts
+
+interface ProjectLink {
+  label: string;
+  url: string;
+}
+
+interface Projects {
+  id: string;
+  title: string;
+  links: ProjectLink[];
+  imageUrl: string;
+  category: string;
+  year: number;
+}
+
+const PROJECTS: Projects[] = [
+  {
+    id: "branding",
+    title: "Branding",
+    links: [
+      { label: "GitHub", url: "https://github.com/branding-project" },
+      { label: "View Project", url: "/projects/branding" },
+    ],
+    imageUrl: "/projects/branding.png",
+    category: "Design",
+    year: 2025,
+  },
+  {
+    id: "project-owow",
+    title: "Project OWOW",
+    links: [
+      { label: "GitHub", url: "https://github.com/project-owow" },
+      { label: "View Project", url: "/projects/owow" },
+    ],
+    imageUrl: "/projects/project-owow.png",
+    category: "Web Development",
+    year: 2025,
+  },
+];
+
+export interface ProjectData {
+  id: string;
+  slug: string;
+  title: string;
+  year: string;
+  description: string;
+  services: string[];
+}
 
 type Project = {
   id: string;
@@ -21,10 +76,10 @@ const ProjectItem: React.FC<{
   setActiveProject: (project: Project | null) => void;
 }> = ({ project, setActiveProject }) => {
   const hasDetailPage = project.links.some((link) =>
-    link.url.startsWith("/projects/")
+    link.url.startsWith("/projects/"),
   );
   const detailPageUrl = project.links.find((link) =>
-    link.url.startsWith("/projects/")
+    link.url.startsWith("/projects/"),
   )?.url;
 
   return (
@@ -42,13 +97,9 @@ const ProjectItem: React.FC<{
       <div className="flex flex-col items-end gap-2 ml-auto text-right">
         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-end gap-1">
           {project.links.map((link) => {
-            if (link.label === "View Project" && hasDetailPage) {
-              return null;
-            }
-
             return (
               <AnimatedLink
-                key={link.url}
+                key={link.label}
                 href={link.url}
                 className="text-base"
               >
@@ -56,9 +107,6 @@ const ProjectItem: React.FC<{
               </AnimatedLink>
             );
           })}
-          {hasDetailPage && (
-            <span className="text-sm opacity-70">View Project →</span>
-          )}
         </div>
         <div className="text-zinc-500 text-sm group-hover:opacity-0 transition-opacity duration-300">
           {project.category} / {project.year}
@@ -69,8 +117,6 @@ const ProjectItem: React.FC<{
 };
 
 const WorkSection = () => {
-  // const projectsArray = Array.isArray(PROJECTS) ? PROJECTS : [];
-
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const cursorLabelRef = useRef<HTMLDivElement>(null);
   const xMoveCursor = useRef<gsap.QuickToFunc | null>(null);
