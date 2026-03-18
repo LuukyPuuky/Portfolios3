@@ -9,6 +9,8 @@ interface AnimatedLinkProps {
   className?: string;
   onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   disabled?: boolean;
+  target?: string;
+  rel?: string;
 }
 
 const AnimatedLink: React.FC<AnimatedLinkProps> = ({
@@ -17,6 +19,8 @@ const AnimatedLink: React.FC<AnimatedLinkProps> = ({
   className = "",
   onClick,
   disabled = false,
+  target,
+  rel,
 }) => {
   const linkRef = useRef<HTMLAnchorElement>(null);
 
@@ -81,6 +85,8 @@ const AnimatedLink: React.FC<AnimatedLinkProps> = ({
   return (
     <a
       href={href}
+      target={target}
+      rel={rel}
       ref={linkRef}
       className={`relative inline-block overflow-hidden text-lg ${className} ${
         disabled

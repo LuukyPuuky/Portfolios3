@@ -23,7 +23,7 @@ export const PROJECTS: Project[] = [
       { label: "GitHub", url: "https://github.com/branding-project" },
       { label: "View Project", url: "/projects/branding" },
     ],
-    imageUrl: "/projects/branding.png",
+    imageUrl: "/BrandingLogo.svg",
     category: "Design",
     year: 2025,
   },
