@@ -1,6 +1,7 @@
 import React from "react";
 import AnimatedLink from "@/components/AnimatedLink";
 import InfiniteScroller from "@/components/InfiniteScroller";
+import Image from "next/image";
 
 const Page = () => {
   return (
@@ -11,10 +12,10 @@ const Page = () => {
         {/* Left Section - Infinite Scrolling Placeholders */}
         <section className="w-full md:w-1/2 h-[50vh] md:h-screen md:border-r border-white/10 relative p-6 md:p-12 selection:bg-white selection:text-black">
           <InfiniteScroller speed={0.5}>
-            <img src="/BrandguideBoris.png" alt="Brand Guide Boris" className="w-full h-auto rounded overflow-hidden" />
-            <img src="/Kleuren.png" alt="Branding Colors" className="w-full h-auto rounded overflow-hidden" />
-            <img src="/MissieBrandguide.png" alt="Brand Guide Mission" className="w-full h-auto rounded overflow-hidden" />
-            <img src="/Mockups.png" alt="Branding Mockups" className="w-full h-auto rounded overflow-hidden" />
+            <Image src="/BrandguideBoris.png" alt="Brand Guide Boris" className="w-full h-auto rounded overflow-hidden" />
+            <Image src="/Kleuren.png" alt="Branding Colors" className="w-full h-auto rounded overflow-hidden" />
+            <Image src="/MissieBrandguide.png" alt="Brand Guide Mission" className="w-full h-auto rounded overflow-hidden" />
+            <Image src="/Mockups.png" alt="Branding Mockups" className="w-full h-auto rounded overflow-hidden" />
           </InfiniteScroller>
         </section>
 
@@ -57,7 +58,7 @@ const Page = () => {
 
               <div className="space-y-4">
                 <h3 className="text-xs font-semibold tracking-widest uppercase mb-4 text-white/50">
-                  What I've Learned
+                  What I&apos;ve Learned
                 </h3>
                 <p className="font-bold text-sm md:text-base leading-snug max-w-sm text-white/80">
                   I learned how to translate a personality into a fitting brand with consistent colors, typography, and practical visual applications (mockups).
