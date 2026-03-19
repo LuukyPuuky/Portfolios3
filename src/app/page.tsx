@@ -19,11 +19,11 @@ export default function Home() {
     <>
       <section
         id="home"
-        className={`h-screen flex items-center justify-center p-6 bg-transparent ${avantt.className}`}
+        className={`relative w-full h-screen bg-transparent ${avantt.className}`}
       >
-        <section>
+        <div className="absolute inset-0 w-full h-full text-left">
           <FluidBackground />
-        </section>
+        </div>
         <Navigation />
       </section>
       <section
