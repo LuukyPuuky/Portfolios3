@@ -10,28 +10,20 @@ const Page = () => {
         
         {/* Left Section - Infinite Scrolling Placeholders */}
         <section className="w-full md:w-1/2 h-[50vh] md:h-screen md:border-r border-white/10 relative p-6 md:p-12 selection:bg-white selection:text-black">
-          <InfiniteScroller speed={0.5}>
-            <div className="w-full aspect-[4/3] bg-white/5 rounded flex items-center justify-center text-sm font-bold uppercase tracking-widest text-white/30">
-              Image Placeholder
-            </div>
-            <div className="w-full aspect-square bg-white/5 rounded flex items-center justify-center text-sm font-bold uppercase tracking-widest text-white/30">
-              Image Placeholder
-            </div>
-            <div className="w-full aspect-video bg-white/5 rounded flex items-center justify-center text-sm font-bold uppercase tracking-widest text-white/30">
-              Image Placeholder
-            </div>
-            <div className="w-full aspect-[4/5] bg-white/5 rounded flex items-center justify-center text-sm font-bold uppercase tracking-widest text-white/30">
-              Image Placeholder
-            </div>
-          </InfiniteScroller>
-        </section>
+                  <InfiniteScroller speed={0.5}>
+                    <img src="/owowCreate.png" alt="Owow Create" className="w-full h-auto rounded overflow-hidden" />
+                    <img src="/owowDashboardpng.png" alt="Owow Dashboard" className="w-full h-auto rounded overflow-hidden" />
+                    <img src="/owowUpload.png" alt="Owow Upload" className="w-full h-auto rounded overflow-hidden" />
+                    <img src="/project-owow.png" alt="Owow Billboard" className="w-full h-auto rounded overflow-hidden" />
+                  </InfiniteScroller>
+                </section>
 
         {/* Right Section - Text Info */}
         <section className="w-full md:w-1/2 min-h-[50vh] md:min-h-screen flex flex-col justify-between p-6 md:p-12 relative z-10 selection:bg-white selection:text-black">
           {/* Top */}
           <div className="flex justify-between items-start w-full gap-4">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-none break-words max-w-[80%]">
-              Project OWOW
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-none wrap-break-word max-w-[80%]">
+              Owow Billboard
             </h1>
             <AnimatedLink
               href="/"
@@ -44,40 +36,55 @@ const Page = () => {
           {/* Middle */}
           <div className="flex flex-col sm:flex-row gap-8 sm:gap-12 mt-20 mb-auto">
             {/* INFO column */}
-            <div className="flex-1 space-y-4">
-              <h3 className="text-xs font-semibold tracking-widest uppercase mb-6 text-white/50">
-                Info
-              </h3>
-              <p className="font-bold text-sm md:text-base leading-snug uppercase max-w-sm">
-                Project OWOW is a web development initiative focused on building scalable, performant web applications.
-              </p>
+            <div className="flex-1 space-y-8">
+              <div className="space-y-4">
+                <h3 className="text-xs font-semibold tracking-widest uppercase mb-6 text-white/50">
+                  Info
+                </h3>
+                <p className="font-semibold text-sm md:text-base leading-snug  max-w-sm">
+                 A dashboard for controlling an Owow flipdot billboard display. This project allows you to create, upload, and manage animated content for a 112x16 pixel LED display using pixel-art animations, GIF uploads, and custom animations.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-xs font-semibold tracking-widest uppercase mb-4 text-white/50">
+                  The Assignment
+                </h3>
+                <p className="font-bold text-sm md:text-base leading-snug max-w-sm text-white/80">
+                  Create something to display on the Owow Billboard. My team and I made a web application to control the billboard. The goal was to build an interface for creating and uploading content for the display.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-xs font-semibold tracking-widest uppercase mb-4 text-white/50">
+                  What I've Learned
+                </h3>
+                <p className="font-bold text-sm md:text-base leading-snug max-w-sm text-white/80">
+                 I gained experience to work with a client that had their own hardware. It also improved my skills in bridging software applications with external hardware.
+                </p>
+              </div>
+
+              
             </div>
 
             {/* Details column */}
             <div className="flex-1 space-y-12">
               <div className="space-y-4">
                 <h3 className="text-xs font-semibold tracking-widest uppercase mb-4 text-white/50">
-                  Role
+                  Work
                 </h3>
                 <ul className="space-y-1 font-bold text-sm md:text-base uppercase">
-                  <li>Frontend Dev</li>
-                  <li>System Architecture</li>
+                  <li>Web Development</li>
+                  <li>Design</li>
                 </ul>
               </div>
 
-              <div className="space-y-4">
+             <div className="space-y-4">
                 <h3 className="text-xs font-semibold tracking-widest uppercase mb-4 text-white/50">
-                  Awards
+                  Project Context
                 </h3>
-                <p className="font-bold text-sm md:text-base uppercase">N/A</p>
-              </div>
-
-              <div className="space-y-4">
-                <h3 className="text-xs font-semibold tracking-widest uppercase mb-4 text-white/50">
-                  Dev
-                </h3>
-                <p className="font-bold text-sm md:text-base uppercase underline underline-offset-4 decoration-2">
-                  Luuk Steijaert
+                <p className="font-bold text-sm md:text-base leading-snug max-w-sm text-white/80">
+                  School project / Concept for client
                 </p>
               </div>
             </div>

@@ -23,7 +23,7 @@ const PROJECTS: Projects[] = [
     id: "branding",
     title: "Branding",
     links: [
-      { label: "GitHub", url: "https://github.com/branding-project" },
+      { label: "Figma", url: "https://www.figma.com/proto/EK9EOAI5VEAANG395V9M2w/Project-1--Branding?page-id=268%3A2&node-id=444-584&starting-point-node-id=444%3A584&t=DCsMkKgfuuESkufG-1" },
       { label: "View Project", url: "/projects/branding" },
     ],
     imageUrl: "/projects/branding.png",
@@ -34,7 +34,7 @@ const PROJECTS: Projects[] = [
     id: "project-owow",
     title: "Project OWOW",
     links: [
-      { label: "GitHub", url: "https://github.com/project-owow" },
+      { label: "GitHub", url: "https://github.com/LuukyPuuky/OwowProject" },
       { label: "View Project", url: "/projects/owow" },
     ],
     imageUrl: "/projects/project-owow.png",
