@@ -32,7 +32,7 @@ const PROJECTS: Projects[] = [
   },
   {
     id: "project-owow",
-    title: "Project OWOW",
+    title: "Owow Billboard",
     links: [
       { label: "GitHub", url: "https://github.com/LuukyPuuky/OwowProject" },
       { label: "View Project", url: "/projects/owow" },

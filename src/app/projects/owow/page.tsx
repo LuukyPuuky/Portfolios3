@@ -12,10 +12,10 @@ const Page = () => {
         {/* Left Section - Infinite Scrolling Placeholders */}
         <section className="w-full md:w-1/2 h-[50vh] md:h-screen md:border-r border-white/10 relative p-6 md:p-12 selection:bg-white selection:text-black">
                   <InfiniteScroller speed={0.5}>
-                    <Image src="/owowCreate.png" alt="Owow Create" className="w-full h-auto rounded overflow-hidden" />
-                    <Image src="/owowDashboardpng.png" alt="Owow Dashboard" className="w-full h-auto rounded overflow-hidden" />
-                    <Image src="/owowUpload.png" alt="Owow Upload" className="w-full h-auto rounded overflow-hidden" />
-                    <Image src="/project-owow.png" alt="Owow Billboard" className="w-full h-auto rounded overflow-hidden" />
+                    <Image src="/owowCreate.png" alt="Owow Create" width={10000} height={1000} className="w-full h-auto rounded overflow-hidden" />
+                    <Image src="/owowDashboardpng.png" alt="Owow Dashboard" width={1000} height={1000} className="w-full h-auto rounded overflow-hidden" />
+                    <Image src="/owowUpload.png" alt="Owow Upload" width={1000} height={1000} className="w-full h-auto rounded overflow-hidden" />
+                    <Image src="/project-owow.png" alt="Owow Billboard" width={1000} height={1000} className="w-full h-auto rounded overflow-hidden" />
                   </InfiniteScroller>
                 </section>
 
@@ -93,9 +93,13 @@ const Page = () => {
 
           {/* Bottom */}
           <div className="flex justify-between items-end mt-16">
-            <div className="text-xl md:text-2xl font-medium tracking-tight">
-              
-            </div>
+               <AnimatedLink
+              href="https://github.com/LuukyPuuky/OwowProject"
+              className="text-xl md:text-2xl font-medium tracking-tight hover:opacity-50 transition-opacity"
+              target="_blank"
+            >
+              Github 
+            </AnimatedLink>
             <AnimatedLink
               href="/projects/branding"
               className="text-xl md:text-2xl font-medium tracking-tight hover:opacity-50 transition-opacity"

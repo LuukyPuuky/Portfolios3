@@ -12,10 +12,10 @@ const Page = () => {
         {/* Left Section - Infinite Scrolling Placeholders */}
         <section className="w-full md:w-1/2 h-[50vh] md:h-screen md:border-r border-white/10 relative p-6 md:p-12 selection:bg-white selection:text-black">
           <InfiniteScroller speed={0.5}>
-            <Image src="/BrandguideBoris.png" alt="Brand Guide Boris" className="w-full h-auto rounded overflow-hidden" />
-            <Image src="/Kleuren.png" alt="Branding Colors" className="w-full h-auto rounded overflow-hidden" />
-            <Image src="/MissieBrandguide.png" alt="Brand Guide Mission" className="w-full h-auto rounded overflow-hidden" />
-            <Image src="/Mockups.png" alt="Branding Mockups" className="w-full h-auto rounded overflow-hidden" />
+            <Image src="/BrandguideBoris.png" width={1000} height={1000} alt="Brand Guide Boris" className="w-full h-auto rounded overflow-hidden" />
+            <Image src="/Kleuren.png" width={1000} height={1000} alt="Branding Colors" className="w-full h-auto rounded overflow-hidden" />
+            <Image src="/MissieBrandguide.png" width={1000} height={1000} alt="Brand Guide Mission" className="w-full h-auto rounded overflow-hidden" />
+            <Image src="/Mockups.png" width={1000} height={1000} alt="Branding Mockups" className="w-full h-auto rounded overflow-hidden" />
           </InfiniteScroller>
         </section>
 
