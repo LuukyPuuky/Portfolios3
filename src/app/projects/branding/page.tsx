@@ -6,21 +6,43 @@ import Image from "next/image";
 const Page = () => {
   return (
     <>
-
-      <main className="flex flex-col-reverse md:flex-row min-h-screen bg-linear-to-bl from-black to-primary text-white overflow-hidden">
-        
+      <main className="flex flex-col-reverse md:flex-row min-h-screen bg-linear-to-bl from-black to-primary text-white">
         {/* Left Section - Infinite Scrolling Placeholders */}
-        <section className="w-full md:w-1/2 h-[50vh] md:h-screen md:border-r border-white/10 relative p-6 md:p-12 selection:bg-white selection:text-black">
+        <section className="w-full md:w-1/2 md:sticky md:top-0 md:h-screen md:border-r border-white/10 relative p-6 md:p-12 selection:bg-white selection:text-black">
           <InfiniteScroller speed={0.5}>
-            <Image src="/BrandguideBoris.png" width={1000} height={1000} alt="Brand Guide Boris" className="w-full h-auto rounded overflow-hidden" />
-            <Image src="/Kleuren.png" width={1000} height={1000} alt="Branding Colors" className="w-full h-auto rounded overflow-hidden" />
-            <Image src="/MissieBrandguide.png" width={1000} height={1000} alt="Brand Guide Mission" className="w-full h-auto rounded overflow-hidden" />
-            <Image src="/Mockups.png" width={1000} height={1000} alt="Branding Mockups" className="w-full h-auto rounded overflow-hidden" />
+            <Image
+              src="/BrandguideBoris.png"
+              width={1000}
+              height={1000}
+              alt="Brand Guide Boris"
+              className="w-full h-auto rounded overflow-hidden"
+            />
+            <Image
+              src="/Kleuren.png"
+              width={1000}
+              height={1000}
+              alt="Branding Colors"
+              className="w-full h-auto rounded overflow-hidden"
+            />
+            <Image
+              src="/MissieBrandguide.png"
+              width={1000}
+              height={1000}
+              alt="Brand Guide Mission"
+              className="w-full h-auto rounded overflow-hidden"
+            />
+            <Image
+              src="/Mockups.png"
+              width={1000}
+              height={1000}
+              alt="Branding Mockups"
+              className="w-full h-auto rounded overflow-hidden"
+            />
           </InfiniteScroller>
         </section>
 
         {/* Right Section - Text Info */}
-        <section className="w-full md:w-1/2 min-h-[50vh] md:min-h-screen flex flex-col justify-between p-6 md:p-12 relative z-10 selection:bg-white selection:text-black">
+        <section className="w-full md:w-1/2 min-h-[50vh] md:h-screen md:overflow-y-auto flex flex-col justify-between p-6 md:p-12 relative z-10 selection:bg-white selection:text-black">
           {/* Top */}
           <div className="flex justify-between items-start w-full gap-4">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-none wrap-break-word max-w-[80%]">
@@ -43,7 +65,8 @@ const Page = () => {
                   Info
                 </h3>
                 <p className="font-bold text-sm md:text-base leading-snug  max-w-sm">
-                  Creating a Brandguide for Boris Schmidt. The goal was to create a brandguide that fit his personality and his work. 
+                  Creating a Brandguide for Boris Schmidt. The goal was to
+                  create a brandguide that fit his personality and his work.
                 </p>
               </div>
 
@@ -52,7 +75,9 @@ const Page = () => {
                   The Assignment
                 </h3>
                 <p className="font-bold text-sm md:text-base leading-snug max-w-sm text-white/80">
-                  Develop a strong visual identity and a complete brand guide that accurately reflects the essence of Boris and his creative vision.
+                  Develop a strong visual identity and a complete brand guide
+                  that accurately reflects the essence of Boris and his creative
+                  vision.
                 </p>
               </div>
 
@@ -61,11 +86,11 @@ const Page = () => {
                   What I&apos;ve Learned
                 </h3>
                 <p className="font-bold text-sm md:text-base leading-snug max-w-sm text-white/80">
-                  I learned how to translate a personality into a fitting brand with consistent colors, typography, and practical visual applications (mockups).
+                  I learned how to translate a personality into a fitting brand
+                  with consistent colors, typography, and practical visual
+                  applications (mockups).
                 </p>
               </div>
-
-              
             </div>
 
             {/* Details column */}
@@ -81,7 +106,7 @@ const Page = () => {
                 </ul>
               </div>
 
-             <div className="space-y-4">
+              <div className="space-y-4">
                 <h3 className="text-xs font-semibold tracking-widest uppercase mb-4 text-white/50">
                   Project Context
                 </h3>
@@ -99,7 +124,7 @@ const Page = () => {
               className="text-xl md:text-2xl font-medium tracking-tight hover:opacity-50 transition-opacity"
               target="_blank"
             >
-              Figma 
+              Figma
             </AnimatedLink>
             <AnimatedLink
               href="/projects/owow"

@@ -8,13 +8,16 @@ interface InfiniteScrollerProps {
   speed?: number; // default speed for auto-scroll
 }
 
-export default function InfiniteScroller({ children, speed = 0.5 }: InfiniteScrollerProps) {
+export default function InfiniteScroller({
+  children,
+  speed = 0.5,
+}: InfiniteScrollerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const offsetRef = useRef(0);
   const velocityRef = useRef(0);
-  
+
   const [isHovering, setIsHovering] = useState(false);
   const cursorRef = useRef<HTMLDivElement>(null);
   const xMoveCursor = useRef<gsap.QuickToFunc | null>(null);
@@ -55,8 +58,8 @@ export default function InfiniteScroller({ children, speed = 0.5 }: InfiniteScro
       if (setHeight > 0) {
         // Apply friction to the scroll velocity
         velocityRef.current *= 0.9;
-        
-        // When velocity drops below a tiny threshold, clamp to 0 
+
+        // When velocity drops below a tiny threshold, clamp to 0
         // to prevent endless micro-movements processing
         if (Math.abs(velocityRef.current) < 0.01) {
           velocityRef.current = 0;
@@ -77,10 +80,10 @@ export default function InfiniteScroller({ children, speed = 0.5 }: InfiniteScro
 
         content.style.transform = `translateY(${offsetRef.current}px)`;
       }
-      
+
       animationFrameId = requestAnimationFrame(update);
     };
-    
+
     // Start animation loop
     animationFrameId = requestAnimationFrame(update);
 
@@ -88,11 +91,11 @@ export default function InfiniteScroller({ children, speed = 0.5 }: InfiniteScro
     const onWheel = (e: WheelEvent) => {
       velocityRef.current += e.deltaY * 0.05;
     };
-    
+
     let lastY = 0;
     const onTouchStart = (e: TouchEvent) => {
       lastY = e.touches[0].clientY;
-      velocityRef.current = 0; 
+      velocityRef.current = 0;
     };
     const onTouchMove = (e: TouchEvent) => {
       const currentY = e.touches[0].clientY;
@@ -115,8 +118,8 @@ export default function InfiniteScroller({ children, speed = 0.5 }: InfiniteScro
   }, [speed]);
 
   return (
-    <div 
-      ref={containerRef} 
+    <div
+      ref={containerRef}
       className="w-full h-full overflow-hidden relative touch-none cursor-none"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
@@ -127,13 +130,18 @@ export default function InfiniteScroller({ children, speed = 0.5 }: InfiniteScro
         }
       }}
     >
-      <div ref={contentRef} className="w-full flex-col flex gap-12 will-change-transform">
+      <div
+        ref={contentRef}
+        className="w-full flex-col flex gap-12 will-change-transform"
+      >
         <div className="flex flex-col gap-12 shrink-0">{children}</div>
-        <div className="flex flex-col gap-12 shrink-0" aria-hidden="true">{children}</div>
+        <div className="flex flex-col gap-12 shrink-0" aria-hidden="true">
+          {children}
+        </div>
       </div>
 
-      <div 
-        ref={cursorRef} 
+      <div
+        ref={cursorRef}
         className={`fixed top-0 left-0 w-20 h-20 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-white text-xs font-bold uppercase tracking-widest pointer-events-none z-50 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-out ${isHovering ? "scale-100 opacity-100" : "scale-0 opacity-0"}`}
       >
         Scroll
